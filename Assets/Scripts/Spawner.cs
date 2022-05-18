@@ -25,12 +25,12 @@ public class Spawner : MonoBehaviour
 
     private void Update()
     {
-        if (_currentWave == null)
+        if (_currentWave == null )
             return;
         
         _timeAfterLastSpawn += Time.deltaTime;
 
-        if (_timeAfterLastSpawn >= _currentWave.Delay)
+        if (_timeAfterLastSpawn >= _currentWave.Delay && _player != null)
         {
             InstantiateEnemy();
             _spawned++;

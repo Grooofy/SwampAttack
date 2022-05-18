@@ -13,8 +13,11 @@ public class Player : MonoBehaviour
     public int Money { get; private set; }
     public event UnityAction<int, int> HealthChanged;
     public event UnityAction<int> MoneyChanged;
+    public event UnityAction Shooting;
+    public event UnityAction Idle;
+    
 
-    private Animator _animation;
+    
     private Weapon _currentWeapon;
     private int _currentWeaponNumber = 0;
 
@@ -23,7 +26,6 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         ChangeWeapon(_weapons[_currentWeaponNumber]);
-        _animation = GetComponent<Animator>();
         _currentHealth = _health;
     }
 
@@ -33,6 +35,12 @@ public class Player : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             _currentWeapon.Shoot(_shootPoint);
+            Shooting?.Invoke();
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            Idle?.Invoke();
         }
     }
 

@@ -7,9 +7,7 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] private int _health;
     [SerializeField] private int _reward;
-
-
-    public Player Target ;
+    public Player Target { get; private set; } 
     public int Reward => _reward;
 
     public event UnityAction<Enemy> Dying;
@@ -18,6 +16,7 @@ public class Enemy : MonoBehaviour
     {
         Target = target;
     }
+    
     public void TakeDamage(int damage)
     {
         _health -= damage;
